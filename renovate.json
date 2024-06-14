@@ -1,8 +1,3 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "postUpgradeTasks": {
-    "commands": ["tslint --fix"],
-    "fileFilters": ["yarn.lock", "**/*.js"],
-    "executionMode": "update"
-  }
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
 }
