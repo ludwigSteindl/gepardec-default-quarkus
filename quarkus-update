@@ -1,8 +1,19 @@
 #!/bin/bash
 
-git reset --hard origin/$1
+git status
+git diff main
+echo "1"
+
 touch "test.txt"
 echo "Hello World $1" > test.txt
 ls -la
 
+git status
+git diff main
+echo "2"
+
 git reset --hard
+
+git status
+git diff main
+echo "3"
