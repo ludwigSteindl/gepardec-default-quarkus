@@ -2,6 +2,7 @@
 
 git status
 git diff main
+git restore .
 echo "1"
 
 touch "test.txt"
