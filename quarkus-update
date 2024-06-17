@@ -1,4 +1,13 @@
 #!/bin/bash
 
-echo $OSTYPE
+sudo apt update
+sudo apt install wget -y
+wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo apt-key add -
+sudo add-apt-repository --yes https://packages.adoptium.net/artifactory/deb/
+
+sudo apt update
+sudo apt install temurin-17-jdk -y
+
+java -version
+
 ./mvnw quarkus:update -Dstream=3.3
