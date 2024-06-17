@@ -1,8 +1,8 @@
 #!/bin/bash
 
-git reset --hard
+git reset --hard origin/$1
 touch "test.txt"
-echo "Hello World" > test.txt
+echo "Hello World $1" > test.txt
 ls -la
 
 git reset --hard
