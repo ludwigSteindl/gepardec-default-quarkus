@@ -1,11 +1,12 @@
 #!/bin/bash
 
-git config --global user.email "christoph.ruhsam@gepardec.com"
-git config --global user.name "Christoph Ruhsam"
-git reset --hard
-git branch
-git diff
-git status
+branchName = $1
+oldVersion = $2
+newVersion = $3
 
-touch "test.txt"
-echo "Hello World $1" > test.txt
+
+if [ $branchName == 'renovate/quarkus.platform.version' ]; then
+  echo "Branch: $branchName; Old version: $oldVersion; New version: $newVersion"
+  sed -i "s/<quarkus.platform.version>.*<\/quarkus.platform.version>/<quarkus.platform.version>$oldVersion<\/quarkus.platform.version>/" pom.xml
+  cat pom.xml
+fi
