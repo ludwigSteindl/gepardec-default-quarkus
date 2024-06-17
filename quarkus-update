@@ -1,3 +1,4 @@
 #!/bin/bash
 
+echo $OSTYPE
 ./mvnw quarkus:update -Dstream=3.3
