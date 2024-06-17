@@ -2,11 +2,10 @@
 
 git config --global user.email "christoph.ruhsam@gepardec.com"
 git config --global user.name "Christoph Ruhsam"
-git restore pom.xml
-git reset HEAD --hard
-git reset pom.xml
-git revert pom.xml
-git revert HEAD
+git reset --hard
+git branch
+git diff
+git status
 
 touch "test.txt"
 echo "Hello World $1" > test.txt
