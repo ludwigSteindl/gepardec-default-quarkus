@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git config --global user.email "christoph.ruhsam@gepardec.com"
+git config --global user.name "Christoph Ruhsam"
 git restore pom.xml
 git reset HEAD --hard
 git reset pom.xml
