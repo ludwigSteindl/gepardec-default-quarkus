@@ -7,6 +7,6 @@ newVersion=$3
 
 if [ "$branchName" = 'renovate/quarkus.platform.version' ]; then
   echo "Branch: $branchName; Old version: $oldVersion; New version: $newVersion"
-  sed -i "s/<quarkus.platform.version>.*<\/quarkus.platform.version>/<quarkus.platform.version>$oldVersion<\/quarkus.platform.version>/" pom.xml
+
   cat pom.xml | grep quarkus.platform.version
 fi
