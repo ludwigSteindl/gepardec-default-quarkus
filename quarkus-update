@@ -1,20 +1,6 @@
 #!/bin/bash
 
-git status
-git diff main
-git restore .
-echo "1"
+git restore pom.xml
 
 touch "test.txt"
 echo "Hello World $1" > test.txt
-ls -la
-
-git status
-git diff main
-echo "2"
-
-git reset --hard
-
-git status
-git diff main
-echo "3"
