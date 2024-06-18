@@ -5,11 +5,12 @@ oldVersion=$2
 newVersion=$3
 newMajorMinor=$4
 
-echo "New MajorMinor"
-echo $newMajorMinor
-echo $branchName
 if [ "$branchName" = "renovate/minor-$newMajorMinor-quarkus" ]; then
   echo "Branch: $branchName; Old version: $oldVersion; New version: $newVersion"
   sed -i "s/<quarkus.platform.version>.*<\/quarkus.platform.version>/<quarkus.platform.version>$oldVersion<\/quarkus.platform.version>/" pom.xml
   cat pom.xml | grep quarkus.platform.version
+
+  mvn clean install
+  # TODO quarkus update --stream=$newMajorMinor
+  # TODO ./mvnw io.quarkus.platform:quarkus-maven-plugin:$mavenPluginVersion:update -N
 fi
