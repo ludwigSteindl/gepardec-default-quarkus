@@ -1,6 +1,0 @@
-#!/bin/bash
-
-touch test.xml
-echo "Hello World" >> test.xml
-
-exit -1
