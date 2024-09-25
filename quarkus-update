@@ -7,7 +7,7 @@ platform=$3
 currentVersion=$4
 newVersion=$5
 
-if [[ "$branchName" =~ renovate/quarkus ]]; then
+if [[ "$branchName" =~ ^renovate/minor-[0-9]+\.[0-9]+-quarkus$ ]]; then
   /tmp/renovate/repos/$platform/$repository/mvnw versions:set-property -Dproperty=quarkus-maven-plugin -DnewVersion=$currentVersion -f /tmp/renovate/repos/$platform/$repository/pom.xml
   /tmp/renovate/repos/$platform/$repository/mvnw -f /tmp/renovate/repos/$platform/$repository/pom.xml io.quarkus.platform:quarkus-maven-plugin:$newVersion:update
 fi
