@@ -1,0 +1,45 @@
+name: Build and Add Link
+
+on:
+  workflow_dispatch:
+  pull_request_target:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo github.ref
+        run: echo ${{ github.event.pull_request.head.ref }}
+
+      - uses: actions/checkout@v3
+        name: checkout
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Break Build for branch 'renovate/quarkus'
+        if: contains(github.event.pull_request.head.ref, 'renovate/quarkus')
+        run: mvn -B test -Dtest=FailingTest --file pom.xml
+
+      - name: Build (and test) project with Maven
+        if: "!contains(github.event.pull_request.head.ref, 'renovate/quarkus')"
+        run: mvn -B test --file pom.xml
+
+  add-link:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: failure()
+    steps:
+      - name: Add link to Pull Request
+        uses: redhat-actions/try-in-web-ide@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          add_comment: true
+          web_ide_instance: https://devspaces.apps.sandbox-m2.ll9k.p1.openshiftapps.com/
