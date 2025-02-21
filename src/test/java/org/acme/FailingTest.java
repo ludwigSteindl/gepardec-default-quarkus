@@ -1,12 +1,13 @@
 package org.acme;
 
+import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
-
-public class FailingTest {
+@QuarkusTest
+class FailingTest {
 
     @Test
-    public void thisAlwaysFails() {
+    void thisAlwaysFails() {
         assert false;
     }
 }
