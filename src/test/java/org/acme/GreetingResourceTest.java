@@ -1,16 +1,16 @@
 package org.acme;
 
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-class GreetingResourceTest {
+public class GreetingResourceTest {
 
     @Test
-    void helloEndpoint() {
+    public void helloEndpoint() {
         given()
           .when().get("/hello")
           .then()

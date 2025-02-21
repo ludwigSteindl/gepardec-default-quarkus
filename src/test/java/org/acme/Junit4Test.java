@@ -4,12 +4,12 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
-class Junit4Test {
+public class Junit4Test {
 
     @Before
     public void setUp() {
@@ -22,7 +22,7 @@ class Junit4Test {
     }
 
     @Test
-    void testHelloEndpoint() {
+    public void testHelloEndpoint() {
         RestAssured.given()
                 .when().get("/hello")
                 .then()
