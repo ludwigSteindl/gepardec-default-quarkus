@@ -2,10 +2,10 @@ package org.acme;
 
 import org.junit.jupiter.api.Test;
 
-public class FailingTest {
+class FailingTest {
 
     @Test
-    void testThisAlwaysFails() {
+    void thisAlwaysFails() {
         assert false;
     }
 }
