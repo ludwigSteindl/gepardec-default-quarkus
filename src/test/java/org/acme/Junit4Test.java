@@ -29,4 +29,10 @@ public class Junit4Test {
                 .statusCode(200)
                 .body(is("Hello from RESTEasy Reactive"));
     }
+
+    @Test(expected = NullPointerException.class)
+    public void whenExceptionThrown_thenExpectationSatisfied() {
+        String nullString = null;
+        nullString.length();
+    }
 }
