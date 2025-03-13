@@ -51,7 +51,7 @@ jobs:
           ./mvnw io.quarkus.platform:quarkus-maven-plugin:${NEW_VERSION}:update
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.RENOVATE_TOKEN }}
           title: Upgrade quarkus from ${{ steps.parse.outputs.CURR_VERSION }} to ${{ steps.parse.outputs.NEW_VERSION }}
