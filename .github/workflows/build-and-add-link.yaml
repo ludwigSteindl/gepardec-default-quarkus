@@ -25,11 +25,11 @@ jobs:
           cache: maven
 
       - name: Break Build for branch 'renovate/quarkus'
-        if: contains(github.event.pull_request.head.ref, 'postupgradetask/quarkus')
+        if: contains(github.event.pull_request.head.ref, 'autoupdate/quarkus')
         run: mvn -B test -Dtest=FailingTest --file pom.xml
 
       - name: Build (and test) project with Maven
-        if: "!contains(github.event.pull_request.head.ref, 'postupgradetask/quarkus')"
+        if: "!contains(github.event.pull_request.head.ref, 'autoupdate/quarkus')"
         run: mvn -B test -Dtest=\!FailingTest --file pom.xml
 
   add-link:
