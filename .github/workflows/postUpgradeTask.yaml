@@ -69,7 +69,7 @@ jobs:
           ls -al
           ./mvnw -v
           java --version
-          ./mvnw io.quarkus.platform:quarkus-maven-plugin:${NEW_VERSION}:update
+          mvn -B io.quarkus.platform:quarkus-maven-plugin:${NEW_VERSION}:update
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
