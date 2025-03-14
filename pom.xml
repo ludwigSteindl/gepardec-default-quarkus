@@ -146,6 +146,37 @@
         </profile>
 
         <profile>
+            <id>openrewrite</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.openrewrite.maven</groupId>
+                        <artifactId>rewrite-maven-plugin</artifactId>
+                        <version>5.43.0</version>
+                        <configuration>
+                            <activeRecipes>
+                                <recipe>${recipe}</recipe>
+                            </activeRecipes>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.gepardec</groupId>
+                                <artifactId>write-open-rewrite</artifactId>
+                                <version>1.0.1-SNAPSHOT</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/Gepardec/write-open-rewrite</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+
+        <profile>
             <id>sbom-generate</id>
             <build>
                 <plugins>
