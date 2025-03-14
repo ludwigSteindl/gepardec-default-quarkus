@@ -25,11 +25,18 @@ jobs:
           GROUPID=$(echo "${GROUPID^}")
           echo "GROUPID=$GROUPID" >> "$GITHUB_OUTPUT"
           echo "NEW_BRANCH=$NEW_BRANCH" >> "$GITHUB_OUTPUT"
+          
+          echo "DEPNAME=$(echo $BRANCH | cut -d'/' -f2 | cut -d'_' -f1)" >> "$GITHUB_OUTPUT"
+          echo "CURR_VERSION=$(echo $BRANCH | cut -d'/' -f2 | cut -d'_' -f2)" >> "$GITHUB_OUTPUT"
+          echo "NEW_VERSION=$(echo $BRANCH | cut -d'/' -f2 | cut -d'_' -f3)" >> "$GITHUB_OUTPUT"
 
       - name: echo parsed values
         env:
           GROUPID: ${{ steps.parse.outputs.GROUPID }}
-        run: echo "groupId=${GROUPID}"
+          DEPNAME: ${{ steps.parse.outputs.DEPNAME }}
+          CURR_VERSION: ${{ steps.parse.outputs.CURR_VERSION }}
+          NEW_VERSION: ${{ steps.parse.outputs.NEW_VERSION }}
+        run: echo "groupId=${GROUPID}, depname=${DEPNAME}, currVersion=${CURR_VERSION}, newVersion=${NEW_VERSION}"
 
       - uses: actions/checkout@v4
         name: checkout
@@ -46,12 +53,23 @@ jobs:
           GITHUB_USER: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GROUPID: ${{ steps.parse.outputs.GROUPID }}
+        if: "!startsWith(github.head_ref, 'renovate/quarkus')"
         run: |
           ls -al
           java --version
           mvn --version
           echo "TODO: call openrewrite recipe"
           mvn rewrite:run -Drecipe=com.gepardec.update.${GROUPID} -Popenrewrite -s .m2/settings.xml
+
+      - name: Upgrade Quarkus
+        env:
+          NEW_VERSION: ${{ steps.parse.outputs.NEW_VERSION }}
+        if: "startsWith(github.head_ref, 'renovate/quarkus')"
+        run: |
+          ls -al
+          java --version
+          mvn --version
+          mvnw -f /tmp/renovate/repos/$platform/$repository/pom.xml io.quarkus.platform:quarkus-maven-plugin:${NEW_VERSION}:update
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7

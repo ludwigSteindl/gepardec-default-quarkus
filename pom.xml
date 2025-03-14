@@ -171,7 +171,7 @@
             <pluginRepositories>
                 <pluginRepository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/Gepardec/write-open-rewrite</url>
+                    <url>https://maven.pkg.github.com/ludwigsteindl/write-open-rewrite</url>
                 </pluginRepository>
             </pluginRepositories>
         </profile>
