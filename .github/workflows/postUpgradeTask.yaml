@@ -67,9 +67,9 @@ jobs:
         if: "startsWith(github.head_ref, 'renovate/quarkus')"
         run: |
           ls -al
+          ./mvnw -v
           java --version
-          mvn --version
-          mvn io.quarkus.platform:quarkus-maven-plugin:${NEW_VERSION}:update
+          ./mvnw io.quarkus.platform:quarkus-maven-plugin:${NEW_VERSION}:update
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
@@ -77,7 +77,7 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
           title: Autoupdate ${{ steps.parse.outputs.GROUPID }}
           branch: autoupdate/${{ steps.parse.outputs.NEW_BRANCH }}
-          base: master
+          base: main
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
           body: |
