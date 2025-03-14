@@ -69,7 +69,7 @@ jobs:
           ls -al
           java --version
           mvn --version
-          mvn -f /tmp/renovate/repos/$platform/$repository/pom.xml io.quarkus.platform:quarkus-maven-plugin:${NEW_VERSION}:update
+          mvn io.quarkus.platform:quarkus-maven-plugin:${NEW_VERSION}:update
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
