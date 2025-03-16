@@ -2,27 +2,28 @@ package org.acme;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
-public class Junit4Test {
+class Junit4Test {
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         System.out.println("🚀 Testvorbereitung läuft...");
     }
 
-    @After
-    public void tearDown() {
+    @AfterEach
+    void tearDown() {
         System.out.println("✅ Test abgeschlossen.");
     }
 
     @Test
-    public void testHelloEndpoint() {
+    void helloEndpoint() {
         RestAssured.given()
                 .when().get("/hello")
                 .then()
@@ -30,9 +31,11 @@ public class Junit4Test {
                 .body(is("Hello from RESTEasy Reactive"));
     }
 
-    @Test(expected = NullPointerException.class)
-    public void whenExceptionThrown_thenExpectationSatisfied() {
-        String nullString = null;
-        nullString.length();
+    @Test
+    void whenExceptionThrown_thenExpectationSatisfied() {
+        assertThrows(NullPointerException.class, () -> {
+            String nullString = null;
+            nullString.length();
+        });
     }
 }
